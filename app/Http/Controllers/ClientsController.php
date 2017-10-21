@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClientsController extends Controller
 {
+    public function __construct() {
+        $this->middleware(['auth']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +18,12 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        $clients = Client::all();
-        return view('clients.home',compact('clients'));
+        if (Auth::user()->can('clients.index'))
+        {
+            $clients = Client::all();
+            return view('clients.home',compact('clients'));
+        }
+        abort('401');
     }
 
     /**
@@ -25,7 +33,11 @@ class ClientsController extends Controller
      */
     public function create()
     {
-        return view('clients.create');
+        if (Auth::user()->can('clients.create'))
+        {
+            return view('clients.create');
+        }
+        abort('401');
     }
 
     /**
@@ -59,8 +71,12 @@ class ClientsController extends Controller
      */
     public function show($id)
     {
-        $clientsDetails = Client::find($id);
-        return view('clients.show',compact('clientsDetails'));
+        if (Auth::user()->can('clients.show'))
+        {
+            $clientsDetails = Client::find($id);
+            return view('clients.show',compact('clientsDetails'));
+        }
+        abort('401');
     }
 
     /**
@@ -71,8 +87,12 @@ class ClientsController extends Controller
      */
     public function edit($id)
     {
-        $editClient = Client::find($id);
-        return view('clients.edit',compact('editClient'));
+        if (Auth::user()->can('clients.edit'))
+        {
+            $editClient = Client::find($id);
+            return view('clients.edit',compact('editClient'));
+        }
+        abort('401');
     }
 
     /**
@@ -108,8 +128,12 @@ class ClientsController extends Controller
      */
     public function destroy($id)
     {
-        $deleteClient = Client::find($id);
-        $deleteClient->delete();
-        return redirect(route('clients.index'))->with('message','Client deleted successfully');
+        if (Auth::user()->can('client.delete'))
+        {
+            $deleteClient = Client::find($id);
+            $deleteClient->delete();
+            return redirect(route('clients.index'))->with('message','Client deleted successfully');
+        }
+        abort('401');
     }
 }

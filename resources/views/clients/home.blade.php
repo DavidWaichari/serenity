@@ -20,7 +20,7 @@
                     <th>Contact</th>
                     <th>Residence</th>
                     <th>Date Added</th>
-                    <th>Action</th>
+                    <th class="text-center">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -33,7 +33,7 @@
                         <td>{!! $client->contact !!}</td>
                         <td> {!! $client->residence !!}</td>
                         <td>{!! $client->created_at->toDateString() !!}</td>
-                        <td><a class="btn btn-primary btn-xs"
+                        <td class="text-center"><a class="btn btn-primary btn-xs"
                                href="{!! route('clients.show',$client->id) !!}">Manage</a></td>
                     </tr>
                 @endforeach
@@ -47,7 +47,7 @@
                     <th>Contact</th>
                     <th>Residence</th>
                     <th>Date Added</th>
-                    <th>Action</th>
+                    <th class="text-center">Action</th>
                 </tr>
                 </tfoot>
             </table>

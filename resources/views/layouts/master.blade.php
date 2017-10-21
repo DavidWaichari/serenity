@@ -316,10 +316,6 @@
            buttons: [
                'copy', 'csv', 'excel', 'pdf', 'print','colvis'
            ],
-           columnDefs: [ {
-               targets: -1,
-               visible: false
-           } ]
        } );
    } );
 </script>

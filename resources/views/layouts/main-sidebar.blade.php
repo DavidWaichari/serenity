@@ -38,19 +38,22 @@
                     <li class="active"><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
                 </ul>
             </li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-pie-chart"></i>
-                    <span>Clients</span>
-                    <span class="pull-right-container">
+            @can(['clients.index','clients.create'])
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-pie-chart"></i>
+                        <span>Clients</span>
+                        <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{!! route('clients.index') !!}"><i class="fa fa-circle-o"></i> Clients List</a></li>
-                    <li><a href="{!! route('clients.create') !!}"><i class="fa fa-circle-o"></i> Add Client</a></li>
-                </ul>
-            </li>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{!! route('clients.index') !!}"><i class="fa fa-circle-o"></i> Clients List</a></li>
+                        <li><a href="{!! route('clients.create') !!}"><i class="fa fa-circle-o"></i> Add Client</a></li>
+                    </ul>
+                </li>
+            @endcan
+            @can(['sponsors.index','sponsors.create'])
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-laptop"></i>
@@ -64,6 +67,7 @@
                     <li><a href="{!! route('sponsors.create') !!}"><i class="fa fa-circle-o"></i> Add Sponsor</a></li>
                 </ul>
             </li>
+            @endcan
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-edit"></i> <span>Admissions</span>

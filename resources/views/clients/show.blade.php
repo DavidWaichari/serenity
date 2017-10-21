@@ -128,11 +128,14 @@
 
             <div class="form-group">
                 <div class="col-md-6 col-md-offset-4">
+                    @can('clients.edit')
                         <a class="btn btn-warning" href="{{route('clients.edit',$clientsDetails->id)}}"> Edit</a>
-
+                    @endcan
+                    @can('clients.delete')
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-danger">
                         Delete
                     </button>
+                    @endcan
                 </div>
             </div>
         </form>

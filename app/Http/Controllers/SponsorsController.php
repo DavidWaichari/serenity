@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Sponsor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SponsorsController extends Controller
 {
+    public function __construct() {
+        $this->middleware(['auth']);
+    }
+    /**
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +19,12 @@ class SponsorsController extends Controller
      */
     public function index()
     {
-        $sponsors = Sponsor::all();
-        return view('sponsors.home',compact('sponsors'));
+        if (Auth::user()->can('sponsors.index'))
+        {
+            $sponsors = Sponsor::all();
+            return view('sponsors.home',compact('sponsors'));
+        }
+        abort('401');
     }
 
     /**
@@ -25,7 +34,11 @@ class SponsorsController extends Controller
      */
     public function create()
     {
-        return view('sponsors.create');
+        if (Auth::user()->can('sponsors.create'))
+        {
+            return view('sponsors.create');
+        }
+        abort('401');
     }
 
     /**
@@ -56,8 +69,12 @@ class SponsorsController extends Controller
      */
     public function show($id)
     {
-        $showSponsor = Sponsor::find($id);
-        return view('sponsors.show',compact('showSponsor'));
+       if (Auth::user()->can('sponsors.show'))
+       {
+           $showSponsor = Sponsor::find($id);
+           return view('sponsors.show',compact('showSponsor'));
+       }
+       abort('401');
     }
 
     /**
@@ -68,8 +85,12 @@ class SponsorsController extends Controller
      */
     public function edit($id)
     {
-        $editSponsor = Sponsor::find($id);
-        return view('sponsors.edit',compact('editSponsor'));
+        if (Auth::user()->can('sponsors.edit'))
+        {
+            $editSponsor = Sponsor::find($id);
+            return view('sponsors.edit',compact('editSponsor'));
+        }
+        abort('401');
     }
 
     /**
@@ -101,9 +122,13 @@ class SponsorsController extends Controller
      */
     public function destroy($id)
     {
-        $deleteSponsor = Sponsor::find($id);
-        $deleteSponsor->delete();
+        if (Auth::user()->can('sponsors.delete'))
+        {
+            $deleteSponsor = Sponsor::find($id);
+            $deleteSponsor->delete();
 
-        return redirect(route('sponsors.index'))->with('message','Sponsor deleted successfully');
+            return redirect(route('sponsors.index'))->with('message','Sponsor deleted successfully');
+        }
+        abort('401');
     }
 }
