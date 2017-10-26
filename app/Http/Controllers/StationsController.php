@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Station;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StationsController extends Controller
 {
@@ -13,7 +15,12 @@ class StationsController extends Controller
      */
     public function index()
     {
-        //
+        if (Auth::user()->can('stations.index'))
+        {
+            $stations = Station::all();
+            return view('stations.home',compact('stations'));
+        }
+        abort('401');
     }
 
     /**
@@ -23,7 +30,11 @@ class StationsController extends Controller
      */
     public function create()
     {
-        //
+        if (Auth::user()->can('stations.create'))
+        {
+           return view('stations.create');
+        }
+        abort('401');
     }
 
     /**
@@ -34,7 +45,11 @@ class StationsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $addStation = new Station();
+        $addStation->name = $request->name;
+        $addStation->save();
+
+        return redirect(route('stations.index'))->with('message','Station Added Successfully');
     }
 
     /**
@@ -45,7 +60,12 @@ class StationsController extends Controller
      */
     public function show($id)
     {
-        //
+        if (Auth::user()->can('stations.show'))
+        {
+            $stationDetails = Station::find($id);
+            return view('stations.show',compact('stationDetails'));
+        }
+        abort('401');
     }
 
     /**
@@ -56,7 +76,13 @@ class StationsController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (Auth::user()->can('stations.edit'))
+        {
+            $editStation = Station::find($id);
+            return view('stations.edit',compact('editStation'));
+        }
+        abort('401');
+
     }
 
     /**
@@ -68,7 +94,11 @@ class StationsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $updateStation = Station::find($id);
+        $updateStation->name = $request->name;
+        $updateStation->save();
+
+        return redirect(route('stations.index'))->with('message','Station details updated successfully');
     }
 
     /**
@@ -79,6 +109,13 @@ class StationsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (Auth::user()->can('stations.delete'))
+        {
+            $deleteStation = Station::find($id);
+            $deleteStation->delete();
+
+            return redirect(route('stations.index'))->with('message','Station Deleted Successfully');
+        }
+        abort('401');
     }
 }
