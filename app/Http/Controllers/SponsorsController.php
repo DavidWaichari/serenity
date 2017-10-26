@@ -49,6 +49,9 @@ class SponsorsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'idnumber'=>'required|max:10|unique:sponsors',
+        ]);
         $createSponsor = new Sponsor();
         $createSponsor->lastname = $request->lastname;
         $createSponsor->firstname = $request->firstname;

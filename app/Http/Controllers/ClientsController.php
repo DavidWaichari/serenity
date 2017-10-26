@@ -104,6 +104,9 @@ class ClientsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request,[
+            'admno'=>'required|max:20|unique:clients',
+        ]);
         $updateClient = Client::find($id);
         $updateClient->admno = $request->admno;
         $updateClient->lastname = $request->lastname;
@@ -128,7 +131,7 @@ class ClientsController extends Controller
      */
     public function destroy($id)
     {
-        if (Auth::user()->can('client.delete'))
+        if (Auth::user()->can('clients.delete'))
         {
             $deleteClient = Client::find($id);
             $deleteClient->delete();

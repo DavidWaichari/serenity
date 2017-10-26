@@ -25,6 +25,5 @@ Route::resource('/roles','RolesController');
 Route::resource('/permissions','PermissionsController');
 Route::resource('/admissions','AdmissionsController');
 Route::resource('/employees','EmployeesController');
-Route::resource('/posts', 'PostController');
 Route::resource('/users', 'UsersController');
 Route::resource('/stations','StationsController');

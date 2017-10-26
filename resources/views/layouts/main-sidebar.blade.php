@@ -68,6 +68,7 @@
                 </ul>
             </li>
             @endcan
+            @can(['admissions.index','admissions.create'])
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-edit"></i> <span>Admissions</span>
@@ -80,6 +81,8 @@
                     <li><a href="{!! route('admissions.create') !!}"><i class="fa fa-circle-o"></i>Add Admission</a></li>
                 </ul>
             </li>
+            @endcan
+            @can(['employees.index','employees.create'])
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-folder"></i> <span>Employees</span>
@@ -92,18 +95,22 @@
                     <li><a href="{!! route('employees.create') !!}"><i class="fa fa-circle-o"></i> Add Employee</a></li>
                 </ul>
             </li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-table"></i> <span>Roles</span>
-                    <span class="pull-right-container">
+            @endcan
+            @can('administer roles & permissions')
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-table"></i> <span>Roles</span>
+                        <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{!! route('roles.index') !!}"><i class="fa fa-circle-o"></i>Roles List</a></li>
-                    <li><a href="{!! route('roles.create') !!}"><i class="fa fa-circle-o"></i>Add Role</a></li>
-                </ul>
-            </li>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{!! route('roles.index') !!}"><i class="fa fa-circle-o"></i>Roles List</a></li>
+                        <li><a href="{!! route('roles.create') !!}"><i class="fa fa-circle-o"></i>Add Role</a></li>
+                    </ul>
+                </li>
+            @endcan
+            @can('administer roles & permissions')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-table"></i> <span>Permissions</span>
@@ -116,6 +123,8 @@
                     <li><a href="{!! route('permissions.create') !!}"><i class="fa fa-circle-o"></i>Add Permission</a></li>
                 </ul>
             </li>
+            @endcan
+            @can('administer roles & permissions')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-edit"></i> <span>Users</span>
@@ -128,6 +137,8 @@
                     <li><a href="{!! route('users.create') !!}"><i class="fa fa-circle-o"></i>Add User</a></li>
                 </ul>
             </li>
+            @endcan
+            @can(['stations.index','stations.create'])
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-dashboard"></i> <span>Stations</span>
@@ -140,6 +151,7 @@
                     <li class="active"><a href="{{route('stations.create')}}"><i class="fa fa-circle-o"></i>Add Station</a></li>
                 </ul>
             </li>
+            @endcan
         </ul>
     </section>
     <!-- /.sidebar -->

@@ -23,7 +23,7 @@
         @foreach ($permissions as $permission)
 
             {{Form::checkbox('permissions[]',  $permission->id, $role->permissions ) }}
-            {{Form::label($permission->name, ucfirst($permission->name)) }}<br>
+            {{Form::label($permission->name, ($permission->name)) }}<br>
 
         @endforeach
         <br>
