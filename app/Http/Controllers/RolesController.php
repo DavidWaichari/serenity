@@ -34,7 +34,7 @@ class RolesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        $permissions = Permission::all();//Get all permissions
+        $permissions = Permission::orderBy('name', 'asc')->get();//Get all permissions
 
         return view('roles.create', ['permissions'=>$permissions]);
     }

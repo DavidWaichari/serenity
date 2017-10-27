@@ -16,8 +16,9 @@ class CreateAdmissionsTable extends Migration
         Schema::create('admissions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('clientsadmn');
-            $table->string('clientname');
+            $table->string('clientsname');
             $table->string('sponsorsname');
+            $table->string('station');
             $table->date('expectedexitdate')->nullable();
             $table->date('exitdate')->nullable();
             $table->string('exitcomments')->nullable();

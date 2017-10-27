@@ -311,7 +311,6 @@
 
    $(document).ready(function() {
        $('#example1').DataTable( {
-           "scrollX": true,
            "pagingType": "full_numbers",
            dom: 'Blfrtip',
            buttons: [

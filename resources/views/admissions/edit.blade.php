@@ -2,21 +2,22 @@
 @section('main-content')
 @section('content-header')
     <h1>
-        Add Admission
+        Edit Admission
     </h1>
     <ol class="breadcrumb">
-        <li>Admit a client</li>
+        <li>Admit the admission details of a client</li>
     </ol>
 @endsection
 <div class="panel panel-default">
     <div class="panel-body">
-        <form class="form-horizontal" method="POST" action="{!! route('admissions.store') !!}">
+        <form class="form-horizontal" method="POST" action="{!! route('admissions.update',$editAdmission->id) !!}">
             {{ csrf_field() }}
+            {{method_field('PATCH')}}
             <div class="form-group{{ $errors->has('clientsadmn') ? ' has-error' : '' }}">
                 <label for="clientsadmn" class="col-md-4 control-label">Admission Number</label>
 
                 <div class="col-md-6">
-                    <input id="clientsadmn" type="text" class="form-control" name="clientsadmn" value="{{ old('clientsadmn') }}"
+                    <input id="clientsadmn" type="text" class="form-control" name="clientsadmn" value="{{ $editAdmission->clientsadmn}}"
                            required
                            autofocus>
                     @if ($errors->has('clientsadmn'))
@@ -31,7 +32,7 @@
 
                 <div class="col-md-6">
                     <input id="clientsname" type="text" class="form-control" name="clientsname"
-                           value="{{ old('clientsname') }}" required
+                           value="{{ $editAdmission->clientsname}}" required
                            autofocus>
                     @if ($errors->has('clientsname'))
                         <span class="help-block">
@@ -45,7 +46,7 @@
 
                 <div class="col-md-6">
                     <input id="sponsorsname" type="text" class="form-control" name="sponsorsname"
-                           value="{{ old('sponsorsname') }}" required
+                           value="{{ $editAdmission->sponsorsname}}" required
                            autofocus>
                     @if ($errors->has('sponsorsname'))
                         <span class="help-block">
@@ -59,7 +60,7 @@
 
                 <div class="col-md-6">
                     <select required class="form-control" name="station" id="station">
-                        <option value="">Select Station</option>
+                        <option value="{{ $editAdmission->station}}">{{ $editAdmission->station}}</option>
                         <option value="Nakuru">Nakuru</option>
                         <option value="Nairobi">Nairobi</option>
                         <option value="Mombasa">Mombasa</option>
@@ -76,7 +77,7 @@
 
                 <div class="col-md-6">
                     <input id="expectedexitdate" type="date" class="form-control" name="expectedexitdate"
-                           value="{{ old('expectedexitdate') }}"
+                           value="{{ $editAdmission->expectedexitdate}}"
                            required>
 
                     @if ($errors->has('expectedexitdate'))
@@ -91,7 +92,7 @@
 
                 <div class="col-md-6">
                     <input id="exitdate" type="date" class="form-control" name="exitdate"
-                           value="{{ old('exitdate') }}"
+                           value="{{ $editAdmission->exitdate}}"
                     >
 
                     @if ($errors->has('exitdate'))
@@ -106,7 +107,7 @@
 
                 <div class="col-md-6">
                         <textarea id="exitcomments" type="text" class="form-control" name="exitcomments"
-                                  value="{{ old('exitcomments') }}"
+                                  value="{{ $editAdmission->exitcomments}}"
                                   autofocus></textarea>
                     @if ($errors->has('exitcomments'))
                         <span class="help-block">
