@@ -16,9 +16,12 @@
                 <label for="clientsadmn" class="col-md-4 control-label">Admission Number</label>
 
                 <div class="col-md-6">
-                    <input id="clientsadmn" type="text" class="form-control" name="clientsadmn" value="{{ old('clientsadmn') }}"
-                           required
-                           autofocus>
+                    <select required class="form-control" name="clientsadmn" id="clientsadmn">
+                        <option >Select Admission Number</option>
+                        @foreach($admissionnumbers as $admissionnumber)
+                            <option value="{{$admissionnumber->admno}}">{!! $admissionnumber->admno !!}</option>
+                        @endforeach
+                    </select>
                     @if ($errors->has('clientsadmn'))
                         <span class="help-block">
                                         <strong>{{ $errors->first('clientsadmn') }}</strong>
@@ -31,11 +34,28 @@
 
                 <div class="col-md-6">
                     <input id="clientsname" type="text" class="form-control" name="clientsname"
-                           value="{{ old('clientsname') }}" required
+                           value="" readonly
                            autofocus>
                     @if ($errors->has('clientsname'))
                         <span class="help-block">
                                         <strong>{{ $errors->first('clientsname') }}</strong>
+                                    </span>
+                    @endif
+                </div>
+            </div>
+            <div class="form-group{{ $errors->has('sponsorsidnumber') ? ' has-error' : '' }}">
+                <label for="sponsorsidnumber" class="col-md-4 control-label">Sponsors ID Number</label>
+
+                <div class="col-md-6">
+                    <select required class="form-control" name="sponsorsidnumber" id="sponsorsidnumber">
+                        <option value="">Select Sponsors ID Number</option>
+                        @foreach($idnumbers as $idnumber)
+                            <option value="{{ $idnumber->idnumber }} " >{!! $idnumber->idnumber !!}</option>
+                        @endforeach
+                    </select>
+                    @if ($errors->has('sponsorsidnumber'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('sponsorsidnumber') }}</strong>
                                     </span>
                     @endif
                 </div>
@@ -45,7 +65,7 @@
 
                 <div class="col-md-6">
                     <input id="sponsorsname" type="text" class="form-control" name="sponsorsname"
-                           value="{{ old('sponsorsname') }}" required
+                           value="{{ old('sponsorsname') }}" readonly
                            autofocus>
                     @if ($errors->has('sponsorsname'))
                         <span class="help-block">
@@ -60,9 +80,9 @@
                 <div class="col-md-6">
                     <select required class="form-control" name="station" id="station">
                         <option value="">Select Station</option>
-                        <option value="Nakuru">Nakuru</option>
-                        <option value="Nairobi">Nairobi</option>
-                        <option value="Mombasa">Mombasa</option>
+                       @foreach($stations as $station)
+                        <option value="{!! $station->name !!}">{!! $station->name !!}</option>
+                           @endforeach
                     </select>
                     @if ($errors->has('station'))
                         <span class="help-block">

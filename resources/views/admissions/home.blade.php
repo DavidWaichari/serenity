@@ -19,6 +19,7 @@
                     <th class="text-center">S/N</th>
                     <th>Clients AdmNo</th>
                     <th>Clients Name</th>
+                    <th>Sponsors ID Number</th>
                     <th>Sponsors Name</th>
                     <th>Station</th>
                     <th>Date Admitted</th>
@@ -34,6 +35,7 @@
                         <td class="text-center">{{ $loop->index + 1 }}</td>
                         <td>{!! $admission->clientsadmn !!}</td>
                         <td>{!! $admission->clientsname !!}</td>
+                        <td>{!! $admission->sponsorsidnumber !!}</td>
                         <td>{!! $admission->sponsorsname !!}</td>
                         <td>{!! $admission->station !!}</td>
                         <td>{!! $admission->created_at->toDateString() !!}</td>
@@ -80,6 +82,7 @@
                     <th class="text-center">S/N</th>
                     <th>Clients AdmNo</th>
                     <th>Clients Name</th>
+                    <th>Sponsors ID Number</th>
                     <th>Sponsors Name</th>
                     <th>Station</th>
                     <th>Date Admitted</th>

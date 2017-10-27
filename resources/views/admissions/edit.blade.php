@@ -41,6 +41,23 @@
                     @endif
                 </div>
             </div>
+            <div class="form-group{{ $errors->has('sponsorsidnumber') ? ' has-error' : '' }}">
+                <label for="sponsorsidnumber" class="col-md-4 control-label">Sponsors ID Number</label>
+
+                <div class="col-md-6">
+                    <select required class="form-control" name="sponsorsidnumber" id="sponsorsidnumber">
+                        <option value="">Select Sponsors ID Number</option>
+                        @foreach($idnumbers as $idnumber)
+                            <option value="{{ $idnumber->firstname }} {{ $idnumber->middlename }} {{ $idnumber->lastname }} " >{!! $idnumber->idnumber !!}</option>
+                        @endforeach
+                    </select>
+                    @if ($errors->has('sponsorsidnumber'))
+                        <span class="help-block">
+                                        <strong>{{ $errors->first('sponsorsidnumber') }}</strong>
+                                    </span>
+                    @endif
+                </div>
+            </div>
             <div class="form-group{{ $errors->has('sponsorsname') ? ' has-error' : '' }}">
                 <label for="sponsorsname" class="col-md-4 control-label">Sponsors Name</label>
 

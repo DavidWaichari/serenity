@@ -17,6 +17,7 @@ class CreateAdmissionsTable extends Migration
             $table->increments('id');
             $table->string('clientsadmn');
             $table->string('clientsname');
+            $table->string('sponsorsidnumber');
             $table->string('sponsorsname');
             $table->string('station');
             $table->date('expectedexitdate')->nullable();

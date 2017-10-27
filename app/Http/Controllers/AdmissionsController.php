@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Admission;
+use App\Client;
+use App\Sponsor;
+use App\Station;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,7 +31,10 @@ class AdmissionsController extends Controller
     {
         if (Auth::user()->can('admissions.create'))
         {
-            return view('admissions.create');
+            $idnumbers = Sponsor::all();
+            $admissionnumbers = Client::all();
+            $stations = Station::all();
+            return view('admissions.create',compact(['stations','admissionnumbers','idnumbers']));
         }
         abort('401');
     }
@@ -42,11 +48,12 @@ class AdmissionsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'clientsadmn'=>'required|max:20|unique:admissions',
+            'clientsadmn'=>'required|max:50|unique:admissions',
         ]);
         $addAddmission = new Admission();
         $addAddmission->clientsadmn = $request->clientsadmn;
         $addAddmission->clientsname = $request->clientsname;
+        $addAddmission->sponsorsidnumber = $request->sponsorsidnumber;
         $addAddmission->sponsorsname = $request->sponsorsname;
         $addAddmission->station = $request->station;
         $addAddmission->expectedexitdate = $request->expectedexitdate;
@@ -101,6 +108,7 @@ class AdmissionsController extends Controller
         $updateAdmission = Admission::find($id);
         $updateAdmission->clientsadmn = $request->clientsadmn;
         $updateAdmission->clientsname = $request->clientsname;
+        $updateAdmission->sponsorsidnumber = $request->sponsorsidnumber;
         $updateAdmission->sponsorsname = $request->sponsorsname;
         $updateAdmission->station = $request->station;
         $updateAdmission->expectedexitdate = $request->expectedexitdate;
