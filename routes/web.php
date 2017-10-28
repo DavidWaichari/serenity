@@ -27,3 +27,4 @@ Route::resource('/admissions','AdmissionsController');
 Route::resource('/employees','EmployeesController');
 Route::resource('/users', 'UsersController');
 Route::resource('/stations','StationsController');
+Route::post('/get-clients-name','HomeController@getClientsName');

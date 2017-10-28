@@ -8,6 +8,7 @@ use App\Sponsor;
 use App\Station;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AdmissionsController extends Controller
 {
@@ -136,4 +137,5 @@ class AdmissionsController extends Controller
         }
         abort('401');
     }
+
 }

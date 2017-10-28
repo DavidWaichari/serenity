@@ -65,7 +65,7 @@
 
                 <div class="col-md-6">
                     <input id="sponsorsname" type="text" class="form-control" name="sponsorsname"
-                           value="{{ old('sponsorsname') }}" readonly
+                           value="{{ old('sponsorsname') }}"
                            autofocus>
                     @if ($errors->has('sponsorsname'))
                         <span class="help-block">
