@@ -320,7 +320,7 @@
                'copy', 'csv', 'excel', 'pdf', 'print','colvis'
            ],
        } );
-
+//the following code is for populating the name of a client during admission based on the admno selected
        $("#clientsadmn").on('change', function () {
            var clientsadmno = $("#clientsadmn").val();
            $.ajaxSetup({
@@ -332,11 +332,33 @@
                method: "POST",
                url: "/get-clients-name/",
                data: {
-                   'admno': clientsadmno
+                   'admno':clientsadmno
                },
                success: function (data) {
                    console.log(data);
                    var element = document.getElementById("clientsname");
+                   element.setAttribute('value', data.firstname.concat("  ", data.middlename,"  ", data.lastname));
+               }
+           });
+       });
+
+       //the following code is for populating the name of a sponsor during admission based on the idnumber selected
+       $("#sponsorsidnumber").on('change', function () {
+           var sponsorsidnumber = $("#sponsorsidnumber").val();
+           $.ajaxSetup({
+               headers: {
+                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+               }
+           });
+           $.ajax({
+               method: "POST",
+               url: "/get-sponsors-name/",
+               data: {
+                   'idnumber':sponsorsidnumber
+               },
+               success: function (data) {
+                   console.log(data);
+                   var element = document.getElementById("sponsorsname");
                    element.setAttribute('value', data.firstname.concat("  ", data.middlename,"  ", data.lastname));
                }
            });

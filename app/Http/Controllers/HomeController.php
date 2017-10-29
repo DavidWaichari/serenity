@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\Sponsor;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -33,6 +34,15 @@ class HomeController extends Controller
             $clientrequest = $request->all();
             $client = Client::where('admno',$clientrequest)->first();
             return response()->json($client);
+        }
+    }
+    public function getSponsorsName(Request $request)
+    {
+        if($request->ajax()){
+
+            $sponsorrequest = $request->all();
+            $sponsor = Sponsor::where('idnumber',$sponsorrequest)->first();
+            return response()->json($sponsor);
         }
     }
 }

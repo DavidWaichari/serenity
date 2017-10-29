@@ -91,8 +91,11 @@ class AdmissionsController extends Controller
     {
         if (Auth::user()->can('admissions.edit'))
         {
+            $stations = Station::all();
+            $idnumbers = Sponsor::all();
+            $admissionnumbers = Client::all();
             $editAdmission = Admission::find($id);
-            return view('admissions.edit',compact('editAdmission'));
+            return view('admissions.edit',compact(['editAdmission','admissionnumbers','idnumbers','stations']));
         }
         abort('401');
     }

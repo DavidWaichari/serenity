@@ -12,14 +12,17 @@
     <div class="panel-body">
         <form class="form-horizontal" method="POST" action="{!! route('admissions.update',$editAdmission->id) !!}">
             {{ csrf_field() }}
-            {{method_field('PATCH')}}
+            {!! method_field('PUT') !!}
             <div class="form-group{{ $errors->has('clientsadmn') ? ' has-error' : '' }}">
                 <label for="clientsadmn" class="col-md-4 control-label">Admission Number</label>
 
                 <div class="col-md-6">
-                    <input id="clientsadmn" type="text" class="form-control" name="clientsadmn" value="{{ $editAdmission->clientsadmn}}"
-                           required
-                           autofocus>
+                    <select required class="form-control" name="clientsadmn" id="clientsadmn">
+                        <option value="{!! $editAdmission-> clientsadmn!!}">{!! $editAdmission-> clientsadmn!!}</option>
+                        @foreach($admissionnumbers as $admissionnumber)
+                            <option value="{{$admissionnumber->admno}}">{!! $admissionnumber->admno !!}</option>
+                        @endforeach
+                    </select>
                     @if ($errors->has('clientsadmn'))
                         <span class="help-block">
                                         <strong>{{ $errors->first('clientsadmn') }}</strong>
@@ -32,7 +35,7 @@
 
                 <div class="col-md-6">
                     <input id="clientsname" type="text" class="form-control" name="clientsname"
-                           value="{{ $editAdmission->clientsname}}" required
+                           value="{!! $editAdmission->clientsname !!}" readonly
                            autofocus>
                     @if ($errors->has('clientsname'))
                         <span class="help-block">
@@ -46,9 +49,9 @@
 
                 <div class="col-md-6">
                     <select required class="form-control" name="sponsorsidnumber" id="sponsorsidnumber">
-                        <option value="">Select Sponsors ID Number</option>
+                        <option value="{!! $editAdmission->sponsorsidnumber !!}">{!! $editAdmission->sponsorsidnumber !!}</option>
                         @foreach($idnumbers as $idnumber)
-                            <option value="{{ $idnumber->firstname }} {{ $idnumber->middlename }} {{ $idnumber->lastname }} " >{!! $idnumber->idnumber !!}</option>
+                            <option value="{{ $idnumber->idnumber }} " >{!! $idnumber->idnumber !!}</option>
                         @endforeach
                     </select>
                     @if ($errors->has('sponsorsidnumber'))
@@ -63,8 +66,8 @@
 
                 <div class="col-md-6">
                     <input id="sponsorsname" type="text" class="form-control" name="sponsorsname"
-                           value="{{ $editAdmission->sponsorsname}}" required
-                           autofocus>
+                           value="{{$editAdmission->sponsorsname }}"
+                           autofocus readonly>
                     @if ($errors->has('sponsorsname'))
                         <span class="help-block">
                                         <strong>{{ $errors->first('sponsorsname') }}</strong>
@@ -77,10 +80,10 @@
 
                 <div class="col-md-6">
                     <select required class="form-control" name="station" id="station">
-                        <option value="{{ $editAdmission->station}}">{{ $editAdmission->station}}</option>
-                        <option value="Nakuru">Nakuru</option>
-                        <option value="Nairobi">Nairobi</option>
-                        <option value="Mombasa">Mombasa</option>
+                        <option value="{{$editAdmission->station }}">{{$editAdmission->station }}</option>
+                        @foreach($stations as $station)
+                            <option value="{!! $station->name !!}">{!! $station->name !!}</option>
+                        @endforeach
                     </select>
                     @if ($errors->has('station'))
                         <span class="help-block">
@@ -94,7 +97,7 @@
 
                 <div class="col-md-6">
                     <input id="expectedexitdate" type="date" class="form-control" name="expectedexitdate"
-                           value="{{ $editAdmission->expectedexitdate}}"
+                           value="{{$editAdmission->expectedexitdate }}"
                            required>
 
                     @if ($errors->has('expectedexitdate'))
@@ -109,7 +112,7 @@
 
                 <div class="col-md-6">
                     <input id="exitdate" type="date" class="form-control" name="exitdate"
-                           value="{{ $editAdmission->exitdate}}"
+                           value="{{$editAdmission->exitdate }}"
                     >
 
                     @if ($errors->has('exitdate'))
@@ -124,7 +127,7 @@
 
                 <div class="col-md-6">
                         <textarea id="exitcomments" type="text" class="form-control" name="exitcomments"
-                                  value="{{ $editAdmission->exitcomments}}"
+                                  value="{{$editAdmission->exitcomments }}"
                                   autofocus></textarea>
                     @if ($errors->has('exitcomments'))
                         <span class="help-block">
