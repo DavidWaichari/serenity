@@ -104,9 +104,6 @@ class ClientsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,[
-            'admno'=>'required|max:20|unique:clients',
-        ]);
         $updateClient = Client::find($id);
         $updateClient->admno = $request->admno;
         $updateClient->lastname = $request->lastname;

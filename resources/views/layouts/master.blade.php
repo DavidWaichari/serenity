@@ -316,6 +316,7 @@
        $('#example1').DataTable( {
            "pagingType": "full_numbers",
            dom: 'Blfrtip',
+           "scrollX": true,
            buttons: [
                'copy', 'csv', 'excel', 'pdf', 'print','colvis'
            ],
