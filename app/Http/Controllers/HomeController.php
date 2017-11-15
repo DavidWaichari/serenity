@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Admission;
 use App\Client;
 use App\Sponsor;
 use Illuminate\Http\Request;
@@ -44,6 +45,26 @@ class HomeController extends Controller
             $sponsor = Sponsor::where('idnumber',$sponsorrequest)->first();
             return response()->json($sponsor);
         }
+    }
+    //function for pupulating the financial table
+    public function getAdmissionDetails(Request $request)
+    {
+        if($request->ajax()){
+
+            $admissiondetailsfinance = $request->all();
+            $result = Admission::where('clientsadmn',$admissiondetailsfinance)->first();
+            return response()->json($result);
+        }
+    }
+
+    public function getRehabBalance()
+    {
+        $totalAmount = 250000;
+        $amountPaid = 70000;
+        $balance = $totalAmount - $amountPaid;
+
+        return dd($balance);
+
     }
 
 }

@@ -26,7 +26,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active treeview menu-open">
+            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     <span class="pull-right-container">
@@ -82,6 +82,18 @@
                 </ul>
             </li>
             @endcan
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa  fa-money"></i> <span>Financial</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('financials.index')}}"><i class="fa fa-circle-o"></i>Financial Records</a></li>
+                    <li><a href="{!! route('financials.create') !!}"><i class="fa fa-circle-o"></i>Add New</a></li>
+                </ul>
+            </li>
             @can(['employees.index','employees.create'])
             <li class="treeview">
                 <a href="#">

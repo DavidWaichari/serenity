@@ -364,6 +364,37 @@
                }
            });
        });
+       //the following code is for populating the name of a client, sponosor id and name, and station for financial
+       //controller
+       $("#financialclientsadmn").on('change', function () {
+           var financialclientsadmn = $("#financialclientsadmn").val();
+           $.ajaxSetup({
+               headers: {
+                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+               }
+           });
+           $.ajax({
+               method: "POST",
+               url: "/get-admission-details-for-financial/",
+               data: {
+                   'clientsadmn':financialclientsadmn
+               },
+               success: function (data) {
+                   console.log(data);
+                   var element = document.getElementById("financialclientsname");
+                   element.setAttribute('value', data.clientsname);
+
+                   var element1 = document.getElementById("financialsponsorsidnumber");
+                   element1.setAttribute('value', data.sponsorsidnumber);
+
+                   var element2 = document.getElementById("financialsponsorsname");
+                   element2.setAttribute('value', data.sponsorsname);
+
+                   var element3 = document.getElementById("fincialstation");
+                   element3.setAttribute('value', data.station);
+               }
+           });
+       });
    } );
 </script>
 </body>

@@ -29,3 +29,6 @@ Route::resource('/users', 'UsersController');
 Route::resource('/stations','StationsController');
 Route::post('/get-clients-name','HomeController@getClientsName');
 Route::post('/get-sponsors-name','HomeController@getSponsorsName');
+Route::resource('/financials','FinancialsController');
+Route::post('/get-admission-details-for-financial','HomeController@getAdmissionDetails');
+Route::get('/rehab-balace','HomeController@getRehabBalance');
